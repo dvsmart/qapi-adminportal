@@ -13,7 +13,7 @@ namespace Admin.Web.Controllers
 {
     public class MenuGroupsController : Controller
     {
-        private DbModel db = new DbModel();
+        private QPocDbEntities db = new QPocDbEntities();
 
         // GET: MenuGroups
         public async Task<ActionResult> Index()

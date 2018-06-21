@@ -119,6 +119,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DAL\DbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\DbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel1.cs</LastGenOutput>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -142,6 +152,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="DAL\DbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\DbModel.edmx.diagram">
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -184,10 +201,50 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\MenuGroupsController.cs" />
     <Compile Include="Controllers\MenuItemsController.cs" />
-    <Compile Include="DAL\DbModel.cs" />
-    <Compile Include="DAL\MenuGroup.cs" />
-    <Compile Include="DAL\MenuItem.cs" />
-    <Compile Include="DAL\Task.cs" />
+    <Compile Include="Controllers\TaskPriorityController.cs" />
+    <Compile Include="Controllers\TaskStatusController.cs" />
+    <Compile Include="DAL\DbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DbModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MenuGroup.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MenuItem.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Task.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TaskPriority.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TaskStatus.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\User.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UserProfile.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UserRole.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\UserType.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +263,16 @@
     <Content Include="Views\MenuGroups\Details.cshtml" />
     <Content Include="Views\MenuGroups\Edit.cshtml" />
     <Content Include="Views\MenuGroups\Index.cshtml" />
+    <Content Include="Views\TaskStatus\Create.cshtml" />
+    <Content Include="Views\TaskStatus\Delete.cshtml" />
+    <Content Include="Views\TaskStatus\Details.cshtml" />
+    <Content Include="Views\TaskStatus\Edit.cshtml" />
+    <Content Include="Views\TaskStatus\Index.cshtml" />
+    <Content Include="Views\TaskPriority\Create.cshtml" />
+    <Content Include="Views\TaskPriority\Delete.cshtml" />
+    <Content Include="Views\TaskPriority\Details.cshtml" />
+    <Content Include="Views\TaskPriority\Edit.cshtml" />
+    <Content Include="Views\TaskPriority\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -218,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

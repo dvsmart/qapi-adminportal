@@ -11,119 +11,110 @@ using Admin.Web.DAL;
 
 namespace Admin.Web.Controllers
 {
-    public class MenuItemsController : Controller
+    public class TaskPriorityController : Controller
     {
         private QPocDbEntities db = new QPocDbEntities();
 
-        // GET: MenuItems
+        // GET: TaskPriority
         public async Task<ActionResult> Index()
         {
-            var menuItems = db.MenuItems.Include(m => m.MenuGroup).Include(m => m.MenuItem1);
-            return View(await menuItems.ToListAsync());
+            return View(await db.TaskPriorities.ToListAsync());
         }
 
-        // GET: MenuItems/Details/5
+        // GET: TaskPriority/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = await db.MenuItems.FindAsync(id);
-            if (menuItem == null)
+            TaskPriority taskPriority = await db.TaskPriorities.FindAsync(id);
+            if (taskPriority == null)
             {
                 return HttpNotFound();
             }
-            return View(menuItem);
+            return View(taskPriority);
         }
 
-        // GET: MenuItems/Create
+        // GET: TaskPriority/Create
         public ActionResult Create()
         {
-            ViewBag.MenuGroupId = new SelectList(db.MenuGroups, "Id", "Name");
-            ViewBag.ParentId = new SelectList(db.MenuItems, "Id", "Caption");
             return View();
         }
 
-        // POST: MenuItems/Create
+        // POST: TaskPriority/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Caption,Route,HasChildren,ClassName,IconName,IsVisible,SortOrder,MenuGroupId,ParentId")] MenuItem menuItem)
+        public async Task<ActionResult> Create([Bind(Include = "Id,AddedDate,ModifiedDate,Name")] TaskPriority taskPriority)
         {
             if (ModelState.IsValid)
             {
-                menuItem.AddedDate = DateTime.Now;
-                menuItem.ModifiedDate = null;
-                db.MenuItems.Add(menuItem);
+                taskPriority.AddedDate = DateTime.Now;
+                taskPriority.ModifiedDate = null;
+                db.TaskPriorities.Add(taskPriority);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MenuGroupId = new SelectList(db.MenuGroups, "Id", "Name", menuItem.MenuGroupId);
-            ViewBag.ParentId = new SelectList(db.MenuItems, "Id", "Caption", menuItem.ParentId);
-            return View(menuItem);
+            return View(taskPriority);
         }
 
-        // GET: MenuItems/Edit/5
+        // GET: TaskPriority/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = await db.MenuItems.FindAsync(id);
-            if (menuItem == null)
+            TaskPriority taskPriority = await db.TaskPriorities.FindAsync(id);
+            if (taskPriority == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MenuGroupId = new SelectList(db.MenuGroups, "Id", "Name", menuItem.MenuGroupId);
-            ViewBag.ParentId = new SelectList(db.MenuItems, "Id", "Caption", menuItem.ParentId);
-            return View(menuItem);
+            return View(taskPriority);
         }
 
-        // POST: MenuItems/Edit/5
+        // POST: TaskPriority/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Caption,Route,HasChildren,ClassName,IconName,IsVisible,SortOrder,MenuGroupId,ParentId")] MenuItem menuItem)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,AddedDate,ModifiedDate,Name")] TaskPriority taskPriority)
         {
             if (ModelState.IsValid)
             {
-                menuItem.ModifiedDate = DateTime.Now;
-                db.Entry(menuItem).State = EntityState.Modified;
+                taskPriority.ModifiedDate = DateTime.Now;
+                db.Entry(taskPriority).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MenuGroupId = new SelectList(db.MenuGroups, "Id", "Name", menuItem.MenuGroupId);
-            ViewBag.ParentId = new SelectList(db.MenuItems, "Id", "Caption", menuItem.ParentId);
-            return View(menuItem);
+            return View(taskPriority);
         }
 
-        // GET: MenuItems/Delete/5
+        // GET: TaskPriority/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = await db.MenuItems.FindAsync(id);
-            if (menuItem == null)
+            TaskPriority taskPriority = await db.TaskPriorities.FindAsync(id);
+            if (taskPriority == null)
             {
                 return HttpNotFound();
             }
-            return View(menuItem);
+            return View(taskPriority);
         }
 
-        // POST: MenuItems/Delete/5
+        // POST: TaskPriority/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            MenuItem menuItem = await db.MenuItems.FindAsync(id);
-            db.MenuItems.Remove(menuItem);
+            TaskPriority taskPriority = await db.TaskPriorities.FindAsync(id);
+            db.TaskPriorities.Remove(taskPriority);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

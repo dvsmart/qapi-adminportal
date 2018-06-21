@@ -12,21 +12,20 @@ namespace Admin.Web.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class MenuGroup
+    public partial class UserType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MenuGroup()
+        public UserType()
         {
-            this.MenuItems = new HashSet<MenuItem>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public System.DateTime AddedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string Name { get; set; }
-        public bool IsVisible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

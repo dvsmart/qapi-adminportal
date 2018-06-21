@@ -12,21 +12,20 @@ namespace Admin.Web.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class MenuGroup
+    public partial class TaskPriority
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MenuGroup()
+        public TaskPriority()
         {
-            this.MenuItems = new HashSet<MenuItem>();
+            this.Tasks = new HashSet<Task>();
         }
     
         public int Id { get; set; }
         public System.DateTime AddedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string Name { get; set; }
-        public bool IsVisible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }
